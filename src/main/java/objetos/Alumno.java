@@ -1,7 +1,6 @@
 package objetos;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class Alumno {
     private String dni;
@@ -16,8 +15,14 @@ public abstract class Alumno {
         this.notas = notas;
     }
 
+    public Alumno(String dni, String nombre, int edad) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
     public double calcularMedia() {
-        return notas.stream().mapToDouble(e -> e).average().orElse(0);
+        return Math.round(notas.stream().mapToDouble(e -> e).average().orElse(0) * 100.0) / 100.0;
     }
 
     public String getDni() {

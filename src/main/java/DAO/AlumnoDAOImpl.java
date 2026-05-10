@@ -11,7 +11,6 @@ import java.util.List;
 
 public class AlumnoDAOImpl implements AlumnoDAO {
 
-
     // Este metodo devuelve una lista de las notas con el dni asignado para que sea más fácil obtenerla
     // y asignarla a cada objeto creado
     @Override
@@ -20,8 +19,10 @@ public class AlumnoDAOImpl implements AlumnoDAO {
         List<Double> lista = new ArrayList<>();
 
         try(Connection conn = Conexion.getConexion()) {
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, dni);
+
+            ResultSet rs = ps.executeQuery();
 
             while(rs.next()) {
                 lista.add(rs.getDouble("nota"));
@@ -34,7 +35,10 @@ public class AlumnoDAOImpl implements AlumnoDAO {
     }
 
     @Override
-    public List<Alumno> obtenerTodos() {
+    public List<Alumno> obtenerTodo() {
+        // Este metodo usa los JOINS en la query para poder determinar directamente si un alumno es de fp o de bachillerato para crear
+        // instancias de cada tipo y no tener que comprobar más adelante si un alumno es de fp o bachillerato
+        // Teniendo en cuenta que un alumno de FP no puede estar en Bachillerato y viceversa
         String sql = "SELECT dni, nombre, edad, fp.ciclo, b.modalidad FROM alumnos LEFT JOIN alumno_fp fp USING(dni) LEFT JOIN alumno_bach b USING(dni)";
         List<Alumno> lista = new ArrayList<>();
 
@@ -94,14 +98,13 @@ public class AlumnoDAOImpl implements AlumnoDAO {
         }
 
         // Comprueba si el objeto alumno se ha creado utilizando el constructor de FP o de Bachillerato
-        // y se hace el casting del objeto alumno al tipo de objeto que se comprueba, en java 16 se puede hacer el casting directamente
-        // dentro del if
+        // y se hace el casting del objeto alumno al tipo de objeto que se comprueba
         if(alumno instanceof AlumnoFP) {
             AlumnoFP fp = (AlumnoFP) alumno;
             String sql2 = "INSERT INTO alumno_fp VALUES(?,?)";
 
             try(Connection conn = Conexion.getConexion()) {
-                PreparedStatement ps = conn.prepareStatement(sql);
+                PreparedStatement ps = conn.prepareStatement(sql2);
                 ps.setString(1, fp.getDni());
                 ps.setString(2, fp.getCiclo());
 
@@ -114,7 +117,7 @@ public class AlumnoDAOImpl implements AlumnoDAO {
             String sql2 = "INSERT INTO alumno_bach VALUES(?,?)";
 
             try(Connection conn = Conexion.getConexion()) {
-                PreparedStatement ps = conn.prepareStatement(sql);
+                PreparedStatement ps = conn.prepareStatement(sql2);
                 ps.setString(1, bach.getDni());
                 ps.setString(2, bach.getModalidad());
 
@@ -128,7 +131,7 @@ public class AlumnoDAOImpl implements AlumnoDAO {
     @Override
     public void eliminarAlumno(Alumno alumno) {
         String sqlnotas = "DELETE FROM notas WHERE dni = ?";
-        String sql = "DELTE FROM alumnos WHERE dni = ?";
+        String sql = "DELETE FROM alumnos WHERE dni = ?";
 
         try(Connection conn = Conexion.getConexion()) {
             PreparedStatement psnotas = conn.prepareStatement(sqlnotas);
@@ -157,54 +160,35 @@ public class AlumnoDAOImpl implements AlumnoDAO {
     }
 
     @Override
-    public void actualizarAlumno(Alumno alumno) {
+    public void actualizarAlumno(String dni, String nombre, int edad, String curso, String extra) {
         String sql = "UPDATE alumnos SET nombre = ?, edad = ? WHERE dni = ?";
 
         try(Connection conn = Conexion.getConexion()) {
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setString(1, alumno.getNombre());
-            ps.setInt(2, alumno.getEdad());
-            ps.setString(3, alumno.getDni());
+            ps.setString(1, nombre);
+            ps.setInt(2, edad);
+            ps.setString(3, dni);
+
             ps.executeUpdate();
 
 
             String sql1;
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-
-            if(alumno instanceof AlumnoFP) {
+            if(curso.equals("FP")) {
                 sql1 = "UPDATE alumno_fp SET ciclo = ? WHERE dni = ?";
-                preparedStatement.setString(1, ((AlumnoFP) alumno).getCiclo());
             } else {
                 sql1 = "UPDATE alumno_bach SET modalidad = ? WHERE dni = ?";
-                preparedStatement.setString(1, ((AlumnoBachillerato) alumno).getModalidad());
             }
 
-            preparedStatement.setString(2, alumno.getDni());
+            PreparedStatement preparedStatement = conn.prepareStatement(sql1);
+            preparedStatement.setString(1, extra);
+            preparedStatement.setString(2, dni);
+
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    @Override
-    public List<String> obtenerDnis() {
-        String sql = "SELECT dni FROM alumnos";
-        List<String> lista = new ArrayList<>();
-
-        try(Connection conn = Conexion.getConexion()) {
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-
-            while(rs.next()) {
-                lista.add(rs.getString("dni"));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        return lista;
     }
 
 }

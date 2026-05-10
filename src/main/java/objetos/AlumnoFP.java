@@ -10,9 +10,14 @@ public class AlumnoFP extends Alumno {
         this.ciclo = ciclo;
     }
 
+    public AlumnoFP(String dni, String nombre, int edad, String ciclo) {
+        super(dni, nombre, edad);
+        this.ciclo = ciclo;
+    }
+
     @Override
     public String toString() {
-        return super.toString() + ", Ciclo: " +ciclo;
+        return super.toString() + ", FP - Ciclo: " +ciclo;
     }
 
     public String getCiclo() {

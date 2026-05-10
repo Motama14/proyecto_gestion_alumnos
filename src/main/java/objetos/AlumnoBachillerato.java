@@ -10,9 +10,14 @@ public class AlumnoBachillerato extends Alumno {
         this.modalidad = modalidad;
     }
 
+    public AlumnoBachillerato(String dni, String nombre, int edad, String modalidad) {
+        super(dni, nombre, edad);
+        this.modalidad = modalidad;
+    }
+
     @Override
     public String toString() {
-        return super.toString() + ", Modalidad: " +modalidad;
+        return super.toString() + ", Bachillerato - Modalidad: " +modalidad;
     }
 
     public String getModalidad() {

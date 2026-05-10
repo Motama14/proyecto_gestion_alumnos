@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml" fx:controller="fxml.ControladorPerfil" spacing="40">
+
+    <VBox id="datosAlumno">
+        <VBox>
+            <VBox styleClass="datoArea">
+                <Label styleClass="titulo">Nombre</Label>
+                <Label fx:id="putNombre" styleClass="dato"/>
+            </VBox>
+
+            <HBox id="datoSecundario">
+                <VBox styleClass="datoArea">
+                    <Label styleClass="titulo">DNI</Label>
+                    <Label fx:id="putDni" styleClass="dato"/>
+                </VBox>
+                <VBox styleClass="datoArea">
+                    <Label styleClass="titulo" >Edad</Label>
+                    <Label fx:id="putEdad" styleClass="dato"/>
+                </VBox>
+                <VBox styleClass="datoArea">
+                    <Label fx:id="putCurso" styleClass="titulo"/>
+                    <Label fx:id="putExtra" styleClass="dato"/>
+                </VBox>
+            </HBox>
+        </VBox>
+
+        <VBox id="formulario">
+            <HBox id="inputs">
+                <TextField fx:id="inputAsignatura" promptText="Asignatura"/>
+                <TextField fx:id="inputNota" promptText="Nota"/>
+            </HBox>
+
+            <VBox id="buttons">
+                <HBox id="buttons2">
+                    <Button fx:id="btnAgregar">Agregar Nota y Asignatura</Button>
+                    <Button fx:id="btnActualizar" disable="true">Actualizar Nota</Button>
+                </HBox>
+
+                <Button fx:id="btnEliminar">Eliminar Nota y Asignatura</Button>
+            </VBox>
+
+            <Label fx:id="errorLabel" visible="false"/>
+        </VBox>
+    </VBox>
+
+    <TableView fx:id="tablaNotas">
+        <columns>
+            <TableColumn fx:id="colAsignatura" text="Asignatura"/>
+            <TableColumn fx:id="colNota" text="Nota"/>
+        </columns>
+    </TableView>
+</HBox>

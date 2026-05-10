@@ -1,0 +1,59 @@
+#tituloTabla {
+    -fx-font-family:"Arial";
+    -fx-font-size: 16px;
+}
+
+.tablaFormulario {
+    -fx-alignment: CENTER;
+}
+
+.tabla {
+    -fx-spacing: 5;
+    -fx-alignment: CENTER;
+}
+
+.form {
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-pref-width: 300;
+    -fx-alignment: TOP_CENTER;
+    -fx-pref-height: 100%;
+}
+
+.smallForm {
+    -fx-pref-width: 150;
+    -fx-spacing: 10;
+    -fx-alignment: CENTER;
+}
+
+.btnNodeForm {
+    -fx-alignment: CENTER;
+    -fx-spacing: 40;
+}
+
+#btnInforme {
+    -fx-pref-width: 500;
+}
+
+#tituloInforme {
+    -fx-font-family:"Arial";
+    -fx-font-size: 16px;
+}
+
+#portInforme {
+    -fx-padding: 10;
+    -fx-spacing: 25;
+}
+
+#Informe {
+    -fx-max-width: 650;
+}
+
+#areaBtnCopiar {
+    -fx-padding: 25;
+    -fx-spacing: 15;
+}
+
+#errorLabel {
+    -fx-text-fill: #FF0000;
+}

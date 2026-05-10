@@ -1,0 +1,10 @@
+DNI: 66666666F, Nombre: Pedro Romero, Edad: 20, Nota media: 8.17, FP - Ciclo: DAM
+DNI: 77777777G, Nombre: Lucía Fernández, Edad: 19, Nota media: 4.17, FP - Ciclo: ASIR
+DNI: 12121212L, Nombre: Diego Morales, Edad: 19, Nota media: 8.75, FP - Ciclo: ASIR
+DNI: 10101010J, Nombre: Marcos Jiménez, Edad: 22, Nota media: 4.83, FP - Ciclo: DAM
+DNI: 88888888H, Nombre: Sergio Molina, Edad: 21, Nota media: 8.0, FP - Ciclo: DAW
+DNI: 11111111K, Nombre: Sofía Torres, Edad: 20, Nota media: 7.17, Bachillerato - Modalidad: Humanidades
+DNI: 15151515O, Nombre: Natalia Vega, Edad: 23, Nota media: 8.0, Bachillerato - Modalidad: Humanidades
+DNI: 99999999I, Nombre: Elena Ruiz, Edad: 18, Nota media: 8.33, Bachillerato - Modalidad: Ciencias
+DNI: 14141414N, Nombre: Adrián Ortega, Edad: 18, Nota media: 4.9, Bachillerato - Modalidad: Ciencias
+DNI: 13131313M, Nombre: Valentina Castro, Edad: 21, Nota media: 8.5, Bachillerato - Modalidad: Artes

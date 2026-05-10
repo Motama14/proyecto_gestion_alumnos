@@ -1,0 +1,54 @@
+#datosAlumno {
+    -fx-alignment: center-left;
+    -fx-padding: 15;
+    -fx-spacing: 40;
+    -fx-pref-width: 350;
+}
+
+#datoSecundario {
+    -fx-alignment: center-left;
+    -fx-spacing: 30;
+}
+
+.datoArea {
+    -fx-spacing: 5;
+}
+
+.titulo {
+    -fx-font-weight: bold;
+}
+
+.dato {
+    -fx-font-size: 16;
+}
+
+#formulario {
+    -fx-spacing: 20;
+    -fx-alignment: CENTER;
+}
+
+#inputs {
+    -fx-spacing: 25;
+    -fx-alignment: CENTER;
+}
+
+#buttons, #buttons2 {
+    -fx-spacing: 10;
+    -fx-alignment: CENTER;
+}
+
+#tablaNotas {
+    -fx-pref-width: 250;
+}
+
+#colAsignatura {
+    -fx-pref-width: 150;
+}
+
+#colNota {
+    -fx-pref-width: 75;
+}
+
+#errorLabel {
+    -fx-text-fill: #FF0000;
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="fxml.ControladorIndex" stylesheets="index.css">
+
+    <HBox spacing="25" styleClass="tablaFormulario">
+        <VBox styleClass="tabla">
+            <Label id="tituloTabla">Lista de Alumnos</Label>
+            <TableView fx:id="tablaAlumnos">
+                <columns>
+                    <TableColumn fx:id="colDni" text="DNI" prefWidth="75"/>
+                    <TableColumn fx:id="colNombre" text="Nombre" prefWidth="150"/>
+                    <TableColumn fx:id="colEdad" text="Edad" prefWidth="50"/>
+                    <TableColumn fx:id="colMedia" text="Media" prefWidth="50"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+        <VBox styleClass="form">
+            <TextField fx:id="inputNombre" promptText="Nombre"/>
+            <HBox styleClass="smallForm">
+                <TextField fx:id="inputDni" promptText="DNI"/>
+                <TextField fx:id="inputEdad" promptText="Edad"/>
+            </HBox>
+
+            <HBox styleClass="smallForm">
+                <ComboBox fx:id="inputCurso" promptText="Curso"/>
+                <TextField fx:id="inputExtra" promptText="Extra"/>
+            </HBox>
+
+            <HBox styleClass="btnNodeForm">
+                <Button fx:id="btnAgregar">Agregar Alumno</Button>
+                <Button fx:id="btnAct" disable="true">Actualizar Alumno</Button>
+            </HBox>
+            <HBox styleClass="btnNodeForm">
+                <Button fx:id="btnEliminar" styleClass="buttonsForm">Eliminar Alumno</Button>
+                <Button fx:id="btnAbrir" styleClass="buttonsForm" disable="true">Abrir perfil</Button>
+            </HBox>
+
+            <Button fx:id="btnInforme" styleClass="buttonsForm">Generar Informe</Button>
+
+            <Label fx:id="errorLabel" visible="false"/>
+        </VBox>
+    </HBox>
+
+    <VBox alignment="CENTER">
+        <HBox id="portInforme">
+            <Label id="tituloInforme">Informe de los alumnos</Label>
+        </HBox>
+
+        <TextArea fx:id="Informe" editable="false"/>
+
+        <HBox id="areaBtnCopiar">
+            <Button fx:id="btnCopiar" disable="true">Copiar al portapapeles</Button>
+            <Button fx:id="btnExportar" disable="true">Exportar a .txt</Button>
+        </HBox>
+    </VBox>
+
+</VBox>
