@@ -1,5 +1,6 @@
-package DAO;
+package DAO.nota;
 
+import DAO.ObjetoDAO;
 import objetos.nota.Nota;
 
 import java.util.List;

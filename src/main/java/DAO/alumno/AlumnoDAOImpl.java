@@ -1,4 +1,4 @@
-package DAO;
+package DAO.alumno;
 
 import jdbc.Conexion;
 import objetos.Alumno;

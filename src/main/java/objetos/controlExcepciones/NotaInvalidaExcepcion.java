@@ -1,4 +1,4 @@
-package objetos.nota;
+package objetos.controlExcepciones;
 
 public class NotaInvalidaExcepcion extends RuntimeException {
     public NotaInvalidaExcepcion(String message) {

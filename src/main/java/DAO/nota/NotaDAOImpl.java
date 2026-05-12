@@ -1,4 +1,4 @@
-package DAO;
+package DAO.nota;
 
 import jdbc.Conexion;
 import objetos.nota.Nota;

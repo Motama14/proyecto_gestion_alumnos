@@ -1,7 +1,7 @@
 package fxml;
 
-import DAO.NotaDAO;
-import DAO.NotaDAOImpl;
+import DAO.nota.NotaDAO;
+import DAO.nota.NotaDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,8 +10,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import objetos.Alumno;
 import objetos.AlumnoBachillerato;
 import objetos.AlumnoFP;
+import objetos.controlExcepciones.Check;
+import objetos.controlExcepciones.StringInvalidoExcepcion;
 import objetos.nota.Nota;
-import objetos.nota.NotaInvalidaExcepcion;
+import objetos.controlExcepciones.NotaInvalidaExcepcion;
 
 
 public class ControladorPerfil {
@@ -115,7 +117,8 @@ public class ControladorPerfil {
 
         if(!inAsignatura.isEmpty() && !inNota.isEmpty()) {
             try {
-                double nota = Nota.parseDouble(inNota);
+                Check.checkAsignatura(inAsignatura);
+                double nota = Check.parseDouble(inNota);
 
                 errorLabel.setVisible(false);
                 Nota n = new Nota(inAsignatura, nota);
@@ -124,7 +127,7 @@ public class ControladorPerfil {
 
                 inputNota.clear();
                 inputAsignatura.clear();
-            } catch (NotaInvalidaExcepcion e) {
+            } catch (NotaInvalidaExcepcion | StringInvalidoExcepcion e) {
                 errorLabel.setText(e.getMessage());
                 errorLabel.setVisible(true);
             }
@@ -141,7 +144,8 @@ public class ControladorPerfil {
 
         if(select != null && !inAsignatura.isEmpty() && !inNota.isEmpty()) {
             try {
-                double nota = Double.parseDouble(inNota);
+                Check.checkAsignatura(inAsignatura);
+                double nota = Check.parseDouble(inNota);
 
                 errorLabel.setVisible(false);
                 notaDAO.actualizarNota(inAsignatura, nota, select.getId());
@@ -149,7 +153,7 @@ public class ControladorPerfil {
 
                 inputNota.clear();
                 inputAsignatura.clear();
-            } catch (NotaInvalidaExcepcion e) {
+            } catch (NotaInvalidaExcepcion | StringInvalidoExcepcion e) {
                 errorLabel.setText(e.getMessage());
                 errorLabel.setVisible(true);
             }

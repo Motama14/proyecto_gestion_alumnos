@@ -1,5 +1,6 @@
-package DAO;
+package DAO.alumno;
 
+import DAO.ObjetoDAO;
 import objetos.Alumno;
 
 import java.util.List;

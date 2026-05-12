@@ -1,7 +1,7 @@
 package fxml;
 
-import DAO.AlumnoDAO;
-import DAO.AlumnoDAOImpl;
+import DAO.alumno.AlumnoDAO;
+import DAO.alumno.AlumnoDAOImpl;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -19,8 +19,9 @@ import javafx.stage.Stage;
 import objetos.Alumno;
 import objetos.AlumnoBachillerato;
 import objetos.AlumnoFP;
-import objetos.edad.Edad;
-import objetos.edad.EdadInvalidaExcepcion;
+import objetos.controlExcepciones.Check;
+import objetos.controlExcepciones.EdadInvalidaExcepcion;
+import objetos.controlExcepciones.StringInvalidoExcepcion;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -180,7 +181,10 @@ public class ControladorIndex {
         if(!inDni.isEmpty() && !inNombre.isEmpty() && !inEdad.isEmpty() && !inCurso.isEmpty() && !inExtra.isEmpty() && (inCurso.equals("Bachillerato") || inCurso.equals("FP"))) {
             if(!listaAlumnos.stream().map(Map.Entry::getKey).collect(Collectors.toList()).contains(inDni)) {
                 try {
-                    int edad = Edad.parseInt(inEdad);
+                    Check.checkDni(inDni);
+                    Check.checkNombre(inNombre);
+                    Check.checkExtra(inExtra);
+                    int edad = Check.parseInt(inEdad);
                     errorLabel.setVisible(false);
 
                     Alumno a;
@@ -202,7 +206,7 @@ public class ControladorIndex {
                     inputNombre.clear();
                     inputEdad.clear();
                     inputExtra.clear();
-                } catch (EdadInvalidaExcepcion e) {
+                } catch (EdadInvalidaExcepcion | StringInvalidoExcepcion e) {
                     errorLabel.setText(e.getMessage());
                     errorLabel.setVisible(true);
                 }
@@ -234,13 +238,16 @@ public class ControladorIndex {
         String inCurso = inputCurso.getValue();
         String inExtra = inputExtra.getText();
 
-        if(!inDni.isEmpty() && !inNombre.isEmpty() && !inEdad.isEmpty() && !inCurso.isEmpty() && !inExtra.isEmpty() && (inCurso.equals("Bachillerato") || inCurso.equals("FP"))) {
+        if(!inNombre.isEmpty() && !inEdad.isEmpty() && !inCurso.isEmpty() && !inExtra.isEmpty() && (inCurso.equals("Bachillerato") || inCurso.equals("FP"))) {
             try {
-                int edad = Edad.parseInt(inEdad);
+                // No se comprueba el DNI porque se inhabilita el campo del DNI cuando se selecciona un alumno para actualizar
+                Check.checkNombre(inNombre);
+                Check.checkExtra(inExtra);
+                int edad = Check.parseInt(inEdad);
                 errorLabel.setVisible(false);
                 alumnoDAO.actualizarAlumno(inDni, inNombre, edad, inCurso, inExtra);
                 cargarDatos();
-            } catch (EdadInvalidaExcepcion e) {
+            } catch (EdadInvalidaExcepcion | StringInvalidoExcepcion e) {
                 errorLabel.setText(e.getMessage());
                 errorLabel.setVisible(true);
             }

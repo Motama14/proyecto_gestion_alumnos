@@ -40,17 +40,4 @@ public class Nota {
         this.nota = nota;
     }
 
-    public static double parseDouble(String valor) {
-        try {
-            double result = Double.parseDouble(valor);
-
-            if(result < 0 || result > 10) {
-                throw new NotaInvalidaExcepcion("La nota debe estar entre 0 y 10");
-            }
-
-            return result;
-        } catch (NumberFormatException e) {
-            throw new NotaInvalidaExcepcion("La nota debe ser un número válido");
-        }
-    }
 }
